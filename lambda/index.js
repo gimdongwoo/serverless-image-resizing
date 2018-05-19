@@ -36,12 +36,12 @@ exports.handler = function (event, context, callback) {
 
   const imageResize = (img) => {
     img.resize(size.width, size.height)
-      .toFormat('png')
+      .jpeg()
       .toBuffer()
       .then(buffer => S3.putObject({
         Body: buffer,
         Bucket: BUCKET,
-        ContentType: 'image/png',
+        ContentType: 'image/jpeg',
         Key: key,
       }).promise())
       .then(() => callback(null, {
